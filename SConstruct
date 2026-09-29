@@ -99,7 +99,9 @@ for x in sorted(glob.glob("platform/*")):
     tmppath = "./" + x
 
     sys.path.insert(0, tmppath)
-    import detect
+    spec = spec_from_file_location("detect", tmppath + "/detect.py")
+    detect = module_from_spec(spec)
+    spec.loader.exec_module(detect)
 
     # Get doc classes paths (if present)
     try:
@@ -125,7 +127,7 @@ for x in sorted(glob.glob("platform/*")):
         if isinstance(platform_flags[x], list):  # backwards compatibility
             platform_flags[x] = {flag[0]: flag[1] for flag in platform_flags[x]}
     sys.path.remove(tmppath)
-    sys.modules.pop("detect")
+    sys.modules.pop("detect", None)
 
 custom_tools = ["default"]
 
