@@ -1,5 +1,5 @@
 short_name = "redot"
-name = "Redot Engine"
+name = "Goth2D"
 major = 4
 minor = 3
 patch = 0
